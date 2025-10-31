@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book World</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/100eedaaf5.js" crossorigin="anonymous"></script>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      transition: 0.3s;
+    }
+
+    /* Dark Mode */
+    body.dark {
+      background-color: #121212;
+      color: #eee;
+    }
+
+   /* Navbar */
+   /* Navbar */
+nav {
+  background:black;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;   
+   padding: 0.4rem 1.5rem;  
+  min-height: 50px;       
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav h2 {
+  font-size: 1.3rem;   
+  font-weight: bold;
+  margin-top: 20;           
+}
+
+
+    /* Links (Desktop) */
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      list-style: none;
+       display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      list-style: none;
+      margin:0 auto
+    }
+    
+
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      transition:  0.3s;
+    }
+
+    .nav-links li a:hover {
+     
+     background: #004f6d;
+      background: #457a49;
+    }
+
+    /* Right side actions */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .nav-toggle,
+    .theme-toggle {
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    /* 🔹 Responsive Navbar */
+    @media (max-width: 900px) {
+      .nav-links {
+        position: fixed;
+        top: 60px; /* navbar ke neeche */
+        left: 0;
+        right: 0;
+        background: #31572c;
+        flex-direction: column;
+        align-items: center;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+      }
+
+      .nav-links.active {
+        max-height: 80vh; /* Slide down */
+        opacity: 1;
+        padding: 1rem 0;
+      }
+
+      .nav-links li {
+        width: 100%;
+        text-align: center;
+      }
+
+      .nav-links li a {
+        display: block;
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .nav-toggle {
+        display: block; /* Sirf mobile pe dikhai de */
+      }
+    }
+
+    /* Desktop: menu button hide */
+    @media (min-width: 901px) {
+      .nav-toggle {
+        display: none;
+      }
+    }
+
+    /* Dark mode */
+    body.dark {
+      background: #121212;
+      color: #fff;
+    }
+
+
+    body.dark nav {
+      background: #1e1e1e;
+    }
+
+    body.dark .nav-links li a {
+      color: #f1f1f1;
+    }
+
+    body.dark .nav-links li a:hover {
+      background: #333;
+    }
+  
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background-image: url("https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1400&q=80");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      padding: 20px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero div {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      color: white;
+      background: #0943af;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #e65c00;
+    }
+/* intro */
+ .intro-bg {
+  height: 60vh;
+  background-image: url("https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=1400&auto=format&fit=crop&q=80");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: rgb(22, 21, 21);
+  position: relative;
+}
+
+.intro-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.intro-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+
+
+    /* Books Section */
+    .books, .varieties, .libraries, .mission, .contact {
+      padding: 80px 20px;
+      text-align: center;
+}
+    .books h2, .varieties h2, .libraries h2, .mission h2, .contact h2 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    .book-container, .variety-container, .library-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .book-card, .variety-card, .library-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    body.dark .book-card,
+    body.dark .variety-card,
+    body.dark .library-card {
+      background: #1e1e1e;
+    }
+
+    .book-card:hover, .variety-card:hover, .library-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
+
+    .book-card img, .variety-card img, .library-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* Mission */
+    .mission {
+      background-image: url("https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1400&q=80");
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      color: white;
+    }
+
+    .mission::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .mission .overlay {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: auto;
+    }
+    /* Our Mission Paragraph */
+.mission .overlay p {
+  margin-bottom: 40px; /* Gap paragraph aur student support ke beech */
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Student Support Box */
+.student-support {
+  margin-top: 20px;
+  text-align: left;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  background: transparent; /* Background removed */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: none;
+  color:white; /* Dark black text */
+}
+
+/* Links inside Student Support */
+.student-support a {
+  color: #ff6600; /* Link color */
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.student-support a:hover {
+  color: #e65c00; /* Hover color */
+  text-decoration: underline;
+}
+
+
+
+
+    .student-support a {
+  color: #000000; /* Link ka color, aap change kar sakte hain */
+  gap: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.student-support ul {
+  list-style: none; 
+  margin-top: 20px;
+  text-align: left;
+  display: inline-block;
+  padding-left: 0; /* Extra space bhi remove karne ke liye */
+}
+
+
+.student-support a:hover {
+  color: #e65c00; /* Hover color */
+  text-decoration: underline; /* Optional: hover me underline show karne ke liye */
+}
+
+
+    .testimonials {
+  padding: 80px 20px;
+  background: #fff;
+  text-align: center;
+}
+
+.testimonials h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #222;
+}
+
+.testimonial-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.testimonial-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.testimonial-card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #ff6600;
+}
+
+.testimonial-card p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.testimonial-card h4 {
+  font-size: 1rem;
+  color: #222;
+  font-weight: bold;
+}
+.cta-section {
+  padding: 80px 20px;
+  text-align: center;
+  background: #2b369b; 
+  color: white;
+}
+
+.cta-section h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.cta-section p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.cta-section .btn {
+  padding: 12px 25px;
+  font-size: 1rem;
+  background: white;
+  color: #1e90ff; /* Button color bhi match kiya */
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.cta-section .btn:hover {
+  background: #cce6ff; /* Hover color */
+}
+
+    /* Contact */
+    .contact form {
+      max-width: 500px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact input, .contact textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .contact button {
+      padding: 12px;
+      border: none;
+      background: #282694;
+      color: white;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .contact button:hover {
+      background: #e65c00;
+    }
+.final-cta-section {
+  padding: 60px 20px;
+  text-align: center;
+  background:#222496; /* Ye blue color hai, aap change kar sakte hain */
+  /* background: #ff6600; Aap color change kar sakte hain */
+  color: white;
+}
+
+.final-cta-section h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.final-cta-section p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.final-cta-section .btn {
+  padding: 12px 25px;
+  font-size: 1rem;
+  background: white;
+  color:#3633d6;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.final-cta-section .btn:hover {
+  background: #ffe6cc;
+}
+
+    /* Footer */
+   footer {
+  
+  background: black;
+  color: white;
+  display: flex;           
+  justify-content: center; 
+  align-items: center;     
+  padding: 2px;           
+}
+.F p{
+  margin-top: 10px;
+  font-style: initial;
+}
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+    <nav>
+    <h2>Book World</h2>
+
+    <!-- Navigation Links -->
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#varieties">Varieties</a></li>
+      <li><a href="#libraries">Libraries</a></li>
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <!-- Actions / Togglers -->
+    <div class="nav-actions">
+      <!-- Theme Toggle -->
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">🌙</button>
+      <!-- Menu Toggle -->
+      <button class="nav-toggle" id="menu-toggle" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div>
+      <h1>Welcome to the Book World</h1>
+      <p>Discover knowledge, stories, and imagination</p>
+      <a href="#books" class="btn">Explore Books</a>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="intro-bg">
+  <div class="intro-content">
+    <h2>Welcome to Book World</h2>
+    <p>Explore a universe of books and knowledge</p>
+  </div>
+</section>
+
+
+  <!-- Popular Books -->
+  <section id="books" class="books">
+    <div class="h"><h2>Popular Books</h2></div><style>
+      .h{
+        text-decoration: underline;
+      }
+    </style>
+    <div class="book-container">
+      <div class="book-card">
+        <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=500&q=80" alt="The Great Gatsby">
+        <h3>The Great Gatsby</h3>
+        <p>A timeless classic exploring love, wealth, and the American Dream.</p>
+      </div>
+      <div class="book-card">
+        <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=500&q=80" alt="Harry Potter">
+        <h3>Harry Potter</h3>
+        <p>J.K. Rowling’s magical world of wizards and spells loved worldwide.</p>
+      </div>
+      <div class="book-card">
+        <img src="https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?auto=format&fit=crop&w=500&q=80" alt="Sapiens">
+        <h3>Sapiens</h3>
+        <p>Yuval Noah Harari’s best-seller on the history and evolution of humankind.</p>
+      </div>
+      <div class="book-card">
+        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=500&q=80" alt="The Alchemist">
+        <h3>The Alchemist</h3>
+        <p>Paulo Coelho’s inspiring tale about dreams, destiny, and self-discovery.</p>
+      </div>
+    </div>
+  </section>
+<hr>
+  <!-- Book Varieties -->
+  <section id="varieties" class="varieties">
+    <div class="v"><h2>Book Varieties</h2></div><style>
+      .v{
+        text-decoration: underline;
+      }
+    </style>
+    <div class="variety-container">
+      <div class="variety-card">
+  <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=500&q=80" alt="Fiction">
+  <h3>Fiction</h3>
+</div>
+      <div class="variety-card"><img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=500&q=80" alt="Science"><h3>Science</h3></div>
+      <div class="variety-card"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=500&q=80" alt="History"><h3>History</h3></div>
+      <div class="variety-card"><img src="https://images.unsplash.com/photo-1529651737248-dad5e287768e?auto=format&fit=crop&w=500&q=80" alt="Novels"><h3>Novels</h3></div>
+      <div class="variety-card"><img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=500&q=80" alt="Biography"><h3>Biography</h3></div>
+      <div class="variety-card"><img src="https://images.unsplash.com/photo-1473187983305-f615310e7daa?auto=format&fit=crop&w=500&q=80" alt="Poetry"><h3>Poetry</h3></div>
+      <div class="variety-card"><img src="https://images.unsplash.com/photo-1526318472351-c75fcf070305?auto=format&fit=crop&w=500&q=80" alt="Philosophy"><h3>Philosophy</h3></div>
+      <div class="variety-card"><img src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?auto=format&fit=crop&w=500&q=80" alt="Travel"><h3>Travel</h3></div>
+      <div class="variety-card"><img src="https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?auto=format&fit=crop&w=500&q=80" alt="Comics"><h3>Comics</h3></div>
+      <div class="variety-card"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500&q=80" alt="Self Help"><h3>Self Help</h3></div>
+    </div>
+  </section>
+<hr>
+ <!-- Famous Libraries Section -->
+<section id="libraries" class="libraries">
+  <div class="w"><h2>Famous Libraries Around the World</h2></div><style>
+    .w{
+      text-decoration: underline;
+    }
+  </style>
+  <div class="library-container">
+    
+    <div class="library-card">
+      <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Library of Congress">
+      <h3>Library of Congress, Washington D.C.</h3>
+    </div>
+
+    <div class="library-card">
+      <img src="https://images.unsplash.com/photo-1505678261036-a3fcc5e884ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Vatican Library">
+      <h3>Vatican Library, Rome</h3>
+    </div>
+
+    <div class="library-card">
+      <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="New York Public Library">
+      <h3>New York Public Library, USA</h3>
+    </div>
+
+    <div class="library-card">
+      <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="National Library of China">
+      <h3>National Library of China, Beijing</h3>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- Mission -->
+  <section id="mission" class="mission">
+    <div class="overlay">
+      <div class="b"><h2>Our Mission</h2></div><style>
+        .b{
+          text-decoration: underline;
+        }
+      </style>
+      <p>At <strong>Book World</strong>, we aim to connect readers with stories, knowledge, and inspiration. Whether you're a casual reader or a passionate bookworm, we have something for you.</p>
+      <div class="student-support">
+  <h3>Special Support for Students</h3>
+  <ul>
+    <li>📚 <a href="#books">Affordable & discounted textbooks</a></li>
+    <li>📝 <a href="#varieties">Study guides & summaries</a></li>
+    <li>💻 <a href="#books">Free e-books & digital resources</a></li>
+    <li>👩‍🏫 <a href="#varieties">Online mentoring & recommendations</a></li>
+    <li>🤝 <a href="#books">Community study groups</a></li>
+  </ul>
+</div>
+
+    </div>
+  </section>
+  <!-- Testimonials Section -->
+<section id="testimonials" class="testimonials">
+  <div class="n"><h2>What Our Readers Say</h2></div><style>
+    .n{
+      text-decoration: underline;
+    }
+  </style>
+  <div class="testimonial-container">
+    <div class="testimonial-card">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Reader 1">
+      <p>"Book World has completely changed the way I read. I found amazing books and got student discounts too!"</p>
+      <h4>- Ayesha Khan, Student</h4>
+    </div>
+    <div class="testimonial-card">
+      <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="Reader 2">
+      <p>"The collection of books is outstanding. I love the recommendations and community study groups."</p>
+      <h4>- Ahmed Ali, Teacher</h4>
+    </div>
+    <div class="testimonial-card">
+      <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Reader 3">
+      <p>"This platform made it easier to access e-books for my research. Highly recommended!"</p>
+      <h4>- Sara Malik, Researcher</h4>
+    </div>
+  </div>
+</section>
+<!-- Call-to-Action Section -->
+<section id="shop-now" class="cta-section">
+  <h2>If You Are Interested</h2>
+  <p>Explore our collection and find your next favorite book.</p>
+  <a href="#books" class="btn">Shop Now</a>
+</section>
+
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="x"><h2>Contact Us</h2></div><style>
+      .x{
+        text-decoration: underline;
+      }
+    </style>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+<!-- Final Info / CTA Section -->
+<section id="final-cta" class="final-cta-section">
+  <h2>Don't Miss Out!</h2>
+  <p>Join thousands of readers and get access to our exclusive collection of books.</p>
+  <a href="#books" class="btn">Explore Now</a>
+</section>
+
+  <!-- Footer -->
+  <footer>
+  <div class="F">
+    <div class="p">
+    <p>&copy; 2025 Book World. All rights reserved.</p>
+  </div>
+  </div>
+  </footer>
+<script>
+  // Mobile nav toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const navLinks = document.getElementById('nav-links');
+
+  menuToggle?.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    const icon = menuToggle.querySelector('i');
+    icon?.classList.toggle('fa-bars');
+    icon?.classList.toggle('fa-times');
+  });
+
+  // Close mobile menu on link click
+  navLinks?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        menuToggle?.setAttribute('aria-expanded','false');
+        const icon = menuToggle?.querySelector('i');
+        icon?.classList.add('fa-bars');
+        icon?.classList.remove('fa-times');
+      }
+    });
+  });
+
+  // 🌙 Dark Mode Toggle
+  const themeToggle = document.getElementById("theme-toggle");
+
+  themeToggle?.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+
+    // 🌞 / 🌙 icon toggle
+    if (document.body.classList.contains("dark")) {
+      themeToggle.textContent = "☀️"; // Sun
+    } else {
+      themeToggle.textContent = "🌙"; // Moon
+    }
+  });
+</script>
+
+
+
+</body>
+</html>
+</body>
+</html>
